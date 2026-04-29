@@ -7,7 +7,6 @@ require("dotenv").config();
 var indexRouter = require("./routes/index");
 var apiRouter = require("./routes/api");
 var errorHandler = require("./middlewares/errorHandler");
-var apiResponse = require("./utils/apiResponse");
 var cors = require("cors");
 
 // DB connection

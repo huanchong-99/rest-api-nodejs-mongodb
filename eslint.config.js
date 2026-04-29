@@ -87,7 +87,6 @@ module.exports = [
         vi: 'readonly',
         before: 'readonly',
         after: 'readonly',
-        describe: 'readonly',
       },
     },
   },
