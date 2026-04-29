@@ -70,4 +70,30 @@ describe("errorHandler middleware", () => {
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ message: "Internal Server Error" }));
   });
+
+  it("handles Mongoose CastError by normalizing to 400", () => {
+    const err = new Error("Cast to ObjectId failed");
+    err.name = "CastError";
+    err.kind = "ObjectId";
+    err.value = "invalid-id";
+    errorHandler(err, req, res, next);
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      message: "Invalid ObjectId: invalid-id"
+    }));
+  });
+
+  it("handles Mongoose ValidationError by normalizing to 400", () => {
+    const err = new Error("Validation failed");
+    err.name = "ValidationError";
+    err.errors = {
+      title: { message: "Title is required" },
+      isbn: { message: "ISBN is required" }
+    };
+    errorHandler(err, req, res, next);
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      message: "Title is required; ISBN is required"
+    }));
+  });
 });

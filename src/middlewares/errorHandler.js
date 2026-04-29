@@ -9,7 +9,8 @@ const apiResponse = require("../utils/apiResponse");
  *   1. express-jwt UnauthorizedError -> 401
  *   2. AppError (operational) -> statusCode from the error
  *   3. Mongoose CastError (invalid ObjectId) -> 400
- *   4. Unknown/programming errors -> 500
+ *   4. Mongoose ValidationError -> 400 with field details
+ *   5. Unknown/programming errors -> 500
  *
  * @see src/errors/AppError.js
  */
@@ -21,6 +22,14 @@ const errorHandler = (err, req, res, next) => {
 		err.message = "Invalid " + err.kind + ": " + err.value;
 	}
 
+	// Normalize Mongoose ValidationError
+	if (err.name === "ValidationError") {
+		err.statusCode = 400;
+		err.isOperational = true;
+		const messages = Object.values(err.errors).map(function(e) { return e.message; });
+		err.message = messages.join("; ");
+	}
+
 	// Handle express-jwt UnauthorizedError
 	if (err.name === "UnauthorizedError") {
 		return apiResponse.unauthorizedResponse(res, err.message);
@@ -28,7 +37,7 @@ const errorHandler = (err, req, res, next) => {
 
 	// Handle operational errors (AppError + normalized Mongoose errors)
 	if (err.isOperational) {
-		const statusCode = err.statusCode || 500;
+		var statusCode = err.statusCode || 500;
 
 		if (statusCode === 401) {
 			return apiResponse.unauthorizedResponse(res, err.message);
