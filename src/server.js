@@ -5,7 +5,7 @@
  * HTTP server entry point.
  *
  * Loads the Express app from src/app.js and starts listening.
- * Alternative to bin/www — both start the same app — both start the same app.
+ * Alternative to bin/www — both start the same app.
  */
 
 var app = require('./app');
