@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+.git
+.github
+.gitignore
+.env
+.env.example
+.vscode
+.idea
+coverage
+.nyc_output
+test
+*.md
+LICENSE
+Dockerfile
+docker-compose.yml

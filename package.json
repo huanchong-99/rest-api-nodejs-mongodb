@@ -4,22 +4,53 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "test": "cross-env NODE_ENV=test jest",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "test:unit": "cross-env NODE_ENV=test jest test/jest/unit",
+    "test:integration": "cross-env NODE_ENV=test jest test/jest/integration",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
+    "test:old": "nyc _mocha --timeout 10000 --exit --report lcovonly -- -R spec",
+    "lint": "eslint --fix \"src/**/*.js\" \"test/**/*.js\" \"bin/www\"",
+    "prepare": "husky"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.2.0",
     "express": "~4.16.0",
     "express-jwt": "^5.3.1",
-    "express-validator": "^6.1.1",
+    "express-validator": "^6.2.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.6.6",
-    "morgan": "~1.9.0"
+    "mongoose": "^5.7.6",
+    "morgan": "~1.9.0",
+    "nodemailer": "^6.3.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^4.1.5",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^17.24.0",
+    "globals": "^17.5.0",
+    "husky": "^9.1.7",
+    "jest": "^30.3.0",
+    "lint-staged": "^16.4.0",
+    "mocha": "^6.2.2",
+    "mongodb-memory-server": "^11.0.1",
+    "nodemon": "^1.19.4",
+    "nyc": "^14.1.0",
+    "prettier": "^3.8.3",
+    "sinon": "^9.2.4",
+    "supertest": "^7.2.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "vitest": "^4.1.5"
   }
 }

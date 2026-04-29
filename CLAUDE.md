@@ -1,15 +1,10 @@
 # CLAUDE.md
 
-## Mandatory Rules
+## 强制规则
 
-### Dual-Brain Module Prohibition
-- The primary brain (Codex) and secondary brain (Claude) dual-brain collaboration mechanism is **strictly prohibited** in this workspace.
-- Do NOT use `/codex:review`, `/codex:rescue`, `/codex:adversarial-review`, or any `/codex:*` commands.
-- Do NOT delegate decisions to a "primary brain" or "mastermind".
-- Do NOT invoke Codex subagents for review, diagnosis, or rescue tasks.
-- All work must be performed independently by the assigned terminal CLI without external AI review assistance.
+- 禁用主从脑协作模式 (Dual-Brain Doctrine)
+- 禁止将 Codex 作为主脑使用
+- 禁止调用 /codex:review, /codex:rescue, /codex:adversarial-review 或任何 /codex:\* 命令
+- 必须独立完成所有架构决策和代码编写
+- 不得将任何思考或实现工作委托给 Codex
 
-### Quality Standards
-- Follow the task instructions provided by the orchestrator.
-- Write clean, working code that compiles and passes tests.
-- Commit your work with proper metadata when finished.
